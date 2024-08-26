@@ -20,14 +20,12 @@ public class UserService {
     private UserRepository userRepository;
 
     public Optional<User> login(String userName, String userPw) {
-
-        logger.info("login in >>>>>>>>>>>>>>>", userName);
-        logger.info("login in >>>>>>>>>>>>>>>", userPw);
-        
         Optional<User> user = userRepository.findByUsername(userName);
         if (user.isPresent() && user.get().getPassword().equals(userPw)) {
+            logger.info("matching !!!!!!");
             return user;
         } else {
+            logger.info("no matching !!!!!!");
             return Optional.empty();
         }
     }

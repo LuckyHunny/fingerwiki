@@ -29,6 +29,11 @@ const Header = styled.header`
   align-items: center; /* 추가: 수직 정렬 */
 `;
 
+const LoginHeader = styled.div`
+  text-align: right;
+  margin-bottom: 8px;
+`;
+
 const LoginButton = styled.button`
   padding: 8px 16px;
   background-color: #007bff;
@@ -56,7 +61,9 @@ const Layout = ({ children, onSectionChange }) => {
   return(
     <Container>
       <GlobalStyle />
-        <LoginButton onClick={openLogin}>로그인</LoginButton> {/* 추가: 로그인 버튼 */}
+        <LoginHeader>
+          <LoginButton onClick={openLogin}>로그인</LoginButton> {/* 추가: 로그인 버튼 */}
+        </LoginHeader>
       <Header>
       </Header>
       <SearchBar />
