@@ -67,7 +67,7 @@ const Button = styled.button`
   }
 `;
 
-const LoginPopup = ({ onClose }) => {
+const LoginPopup = ({ onClose, userLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -75,7 +75,13 @@ const LoginPopup = ({ onClose }) => {
     axios.post('/api/login', { username, password })
       .then(response => {
         alert(response.data.reData);
-        alert(response.data.name);
+        if(response.data.reData){
+          alert(response.data.name);
+          userLogin(true);
+        }else{
+          userLogin(false);
+        }
+        
         onClose();
       })
       .catch(error => {

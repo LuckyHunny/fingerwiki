@@ -52,17 +52,29 @@ const Main = styled.main`
 `;
 
 const Layout = ({ children, onSectionChange }) => {
-  
+  const [loginYn, setLoginYn] = useState(false);  // 추가 : 유저 로그인 여부 체크
   const [isLoginOpen, setLoginOpen] = useState(false); // 추가: 로그인 팝업 상태 관리
 
-  const openLogin = () => setLoginOpen(true); // 추가: 로그인 팝업 열기
+  const openLogin = (event) => {
+    // 버튼 텍스트 적용
+    if(event.target.innerText === '로그인'){
+      setLoginOpen(true); // 추가: 로그인 팝업 열기      
+    }else{
+      setLoginYn(false);
+    }
+  }
   const closeLogin = () => setLoginOpen(false); // 추가: 로그인 팝업 닫기
+
+  // 로그인 체크 함수
+  const userLogin = (data) => {
+    setLoginYn(data);
+  }
 
   return(
     <Container>
       <GlobalStyle />
         <LoginHeader>
-          <LoginButton onClick={openLogin}>로그인</LoginButton> {/* 추가: 로그인 버튼 */}
+          <LoginButton onClick={openLogin}>{loginYn ? '로그아웃':'로그인'}</LoginButton> {/* 추가: 로그인 버튼 */}
         </LoginHeader>
       <Header>
       </Header>
@@ -70,7 +82,7 @@ const Layout = ({ children, onSectionChange }) => {
       <TableOfContents onSectionChange={onSectionChange} />
       <Main>{children}</Main>
       {/* 추가: 로그인 팝업을 조건부 렌더링 */}
-      {isLoginOpen && <LoginPopup onClose={closeLogin} />} {/* 추가: 로그인 팝업 */}
+      {isLoginOpen && <LoginPopup onClose={closeLogin} userLogin={userLogin} />} {/* 추가: 로그인 팝업 */}
     </Container>
   )
 };
