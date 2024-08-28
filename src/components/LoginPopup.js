@@ -77,9 +77,9 @@ const LoginPopup = ({ onClose, userLogin }) => {
         alert(response.data.reData);
         if(response.data.reData){
           alert(response.data.name);
-          userLogin(true);
+          userLogin(true, response.data.name);
         }else{
-          userLogin(false);
+          userLogin(false, '');
         }
         
         onClose();
